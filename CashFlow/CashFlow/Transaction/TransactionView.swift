@@ -75,6 +75,7 @@ struct TransactionView: View {
                     ForEach(mainViewModel.transList) { transaction in
                         
                         TransactionCellView(transaction: transaction)
+                            .id(refreshTrigger)
                             
                     }
                 }
@@ -84,12 +85,13 @@ struct TransactionView: View {
             .sheet(isPresented: $showAddTrans) {
                 AddTransactionView()
             }
-            .task {
+            .refreshable {
                 refreshTrigger = UUID()
             }
             .onChange(of: mainViewModel.transList) { _, _ in
                 mainViewModel.saveTrans()
                 mainViewModel.calculateMonthlyIncomeAndExpense()
+                refreshTrigger = UUID()
             }
         }
     }
