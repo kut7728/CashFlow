@@ -9,12 +9,14 @@ import SwiftUI
 
 struct TransactionView: View {
     @State private var showAddTrans: Bool = false
-    @State private var viewModel = MainViewModel()
+    @State private var refreshTrigger = UUID()
+    @Environment(MainViewModel.self) var mainViewModel
     
     private var monthlySummary: (income: Int, expense: Int) { MainViewModel.shared.monthlySummary["2025-02"] ?? (0, 0) }
     
     // MARK: - body
     var body: some View {
+        @Bindable var mainViewModel = mainViewModel
         
         NavigationStack {
             VStack {
@@ -70,26 +72,10 @@ struct TransactionView: View {
                 .frame(height: 130)
                 
                 List {
-                    ForEach(viewModel.transList) { transaction in
+                    ForEach(mainViewModel.transList) { transaction in
                         
                         TransactionCellView(transaction: transaction)
-                            .swipeActions(allowsFullSwipe: true) {
-                                Button(role: .destructive) {
-                                    viewModel.transList.removeAll { $0.id == transaction.id }
-                                } label: {
-                                    Label("삭제", systemImage: "trash")
-                                    
-                                }
-                            }
-                            .background {
-                                NavigationLink {
-                                    EditTransactionView(transaction: transaction)
-                                } label: {
-                                    EmptyView()
-                                }
-
-
-                            }
+                            
                     }
                 }
                 .listStyle(.plain)
@@ -98,9 +84,12 @@ struct TransactionView: View {
             .sheet(isPresented: $showAddTrans) {
                 AddTransactionView()
             }
-            .onChange(of: viewModel.transList) { _, _ in
-                viewModel.saveTrans()
-                viewModel.calculateMonthlyIncomeAndExpense()
+            .task {
+                refreshTrigger = UUID()
+            }
+            .onChange(of: mainViewModel.transList) { _, _ in
+                mainViewModel.saveTrans()
+                mainViewModel.calculateMonthlyIncomeAndExpense()
             }
         }
     }

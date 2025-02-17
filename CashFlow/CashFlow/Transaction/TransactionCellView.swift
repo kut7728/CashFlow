@@ -47,6 +47,24 @@ struct TransactionCellView: View {
             
         }
         .frame(height: 55)
+        .swipeActions(allowsFullSwipe: true) {
+            Button(role: .destructive) {
+                MainViewModel.shared.transList.removeAll { $0.id == transaction.id }
+            } label: {
+                Label("삭제", systemImage: "trash")
+                
+            }
+        }
+        .background {
+            NavigationLink {
+                EditTransactionView(transaction: transaction)
+            } label: {
+                EmptyView()
+            }
+            .opacity(0)
+
+
+        }
     }
 }
 

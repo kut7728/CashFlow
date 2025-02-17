@@ -9,11 +9,13 @@ import SwiftUI
 
 struct EditTransactionView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(MainViewModel.self) var mainViewModel
     
     @State var transaction: Transaction
-    @Bindable var viewModel: MainViewModel
     
     var body: some View {
+        @Bindable var mainViewModel = mainViewModel
+        
         VStack {
             Spacer()
                 .frame(height: 30)
@@ -94,8 +96,8 @@ struct EditTransactionView: View {
             Spacer()
             
             Button {
-                MainViewModel.shared.updateTransaction(transaction, newTransaction: transaction)
-                MainViewModel.shared.saveTrans()
+                mainViewModel.updateTransaction(transaction, newTransaction: transaction)
+                mainViewModel.saveTrans()
                 dismiss()
             } label: {
                 Text("저장")
