@@ -14,8 +14,8 @@ class NewTransViewModel {
     let id: UUID = UUID()
     
     var transactionName: String = ""
-    var amount: String = ""
-    var amountValue: Int { amount.NumberFormatter() }
+    var amount: String = "" // 원이 붙은 포맷된 문자열
+    var amountValue: Int = 0 // 순수한 정수 값
     var date: Date = Date()
     var category: TransactionCategory = .expense
     
@@ -23,8 +23,20 @@ class NewTransViewModel {
     
     
     // MARK: - 메서드
-    ///
-    func formatAmount(_ value: String) -> String {
+    
+    func addTotransList() {
+        MainViewModel.shared.transList.append(Transaction(id: id,
+                                                          date: date,
+                                                          name: transactionName,
+                                                          amount: amount,
+                                                          amountValue: amountValue,
+                                                          category: category)
+        )
+        MainViewModel.shared.transList.sort( by: { $0.date > $1.date } )
+    }
+    
+    /// 원과 쉼표가 붙은 포맷 문자열 출력하는 메서드
+    static func formatAmount(_ value: String) -> String {
         let formattedAmount: String
         let filtered = value.filter { "0123456789".contains($0) }
         
@@ -38,7 +50,7 @@ class NewTransViewModel {
     }
     
     
-    var wonFormatter: NumberFormatter {
+    static var wonFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 0

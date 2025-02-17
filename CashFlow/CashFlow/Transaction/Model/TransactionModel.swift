@@ -8,11 +8,13 @@
 import Foundation
 
 /// 지출 항목 구조체
-struct Transaction: Identifiable, Codable {
+struct Transaction: Identifiable, Codable, Equatable {
     var id: UUID
     
     var date: Date
-    var amount: Int
+    var name: String
+    var amount: String
+    var amountValue: Int
     var category: TransactionCategory
 }
 
@@ -21,4 +23,9 @@ enum TransactionCategory: String, Codable, CaseIterable {
     case income = "수입"
     case expense = "지출"
     case fixedExpense = "고정지출"
+}
+
+extension Transaction {
+    static var sampleData = Transaction(id: UUID(), date: Date(), name: "sample", amount: "123,333,222 원", amountValue: 123333222, category: .expense)
+        
 }
