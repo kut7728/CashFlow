@@ -33,6 +33,7 @@ struct AddTransactionView: View {
                 
                 
                 DatePicker("날짜", selection: $viewModel.date, displayedComponents: .date)
+                    .environment(\.locale, Locale(identifier: "ko_KR"))
                     .datePickerStyle(.graphical)
                 
                 Divider()
@@ -74,7 +75,8 @@ struct AddTransactionView: View {
                         TextField("입력해주세요", text: $viewModel.amount)
                             .keyboardType(.numberPad)
                             .onSubmit {
-                                viewModel.amount = viewModel.formatAmount(viewModel.amount)
+                                viewModel.amountValue = Int(viewModel.amount)!
+                                viewModel.amount = NewTransViewModel.formatAmount(viewModel.amount)
                             }
                         Button {
                             viewModel.amount = ""
@@ -91,7 +93,8 @@ struct AddTransactionView: View {
                 Spacer()
                 
                 Button {
-                    print()
+                    viewModel.addTotransList()
+                    dismiss()
                 } label: {
                     Text("저장")
                         .font(.headline)
