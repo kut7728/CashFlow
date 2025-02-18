@@ -12,7 +12,7 @@ struct TransactionView: View {
     @State private var refreshTrigger = UUID()
     @Environment(MainViewModel.self) var mainViewModel
     
-    private var monthlySummary: (income: Int, expense: Int) { MainViewModel.shared.monthlySummary["2025-02"] ?? (0, 0) }
+    private var monthlySummary: (income: Int, expense: Int, fixedExpense: Int) { MainViewModel.shared.monthlySummary["2025-02"] ?? (0, 0, 0) }
     
     // MARK: - body
     var body: some View {

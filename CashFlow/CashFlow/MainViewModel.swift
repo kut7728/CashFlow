@@ -14,7 +14,7 @@ class MainViewModel {
     
     // 거래 항목을 모두 담는 리스트
     var transList: [Transaction] = []
-    var monthlySummary: [String: (income: Int, expense: Int)] = [:]
+    var monthlySummary: [String: (income: Int, expense: Int, fixedExpense: Int)] = [:]  // { "2025-02": (income: 500000, expense: 320000), ... }
     
     init() {
         loadTrans()
@@ -35,24 +35,27 @@ class MainViewModel {
     
     // MARK: - 달별 총액 계산 파트
     func calculateMonthlyIncomeAndExpense(){
-        var monthlySummary: [String: (income: Int, expense: Int)] = [:]
+        var monthlySummary: [String: (income: Int, expense: Int, fixedExpense: Int)] = [:]
 
         for transaction in self.transList {
             let monthKey = transaction.date.yearMonthString()  // "YYYY-MM" 변환
 
             if monthlySummary[monthKey] == nil {
-                monthlySummary[monthKey] = (income: 0, expense: 0)  // 초기값 설정
+                monthlySummary[monthKey] = (income: 0, expense: 0, fixedExpense: 0)  // 초기값 설정
             }
 
-            // `amountValue`가 음수면 지출(expense), 양수면 수입(income)
             if transaction.category == .income {
                 monthlySummary[monthKey]!.income += transaction.amountValue
-            } else {
+            } else if transaction.category == .expense{
                 monthlySummary[monthKey]!.expense += transaction.amountValue
+            } else {
+                monthlySummary[monthKey]!.fixedExpense += transaction.amountValue
+                monthlySummary[monthKey]!.expense += transaction.amountValue
+
             }
         }
 
-        self.monthlySummary = monthlySummary  // 📌 { "2025-02": (income: 500000, expense: 320000), ... }
+        self.monthlySummary = monthlySummary  // { "2025-02": (income: 500000, expense: 320000), ... }
     }
     
     
