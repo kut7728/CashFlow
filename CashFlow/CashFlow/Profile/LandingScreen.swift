@@ -6,56 +6,53 @@ import SwiftUI
 struct LandingScreen: View {
     var body: some View {
         NavigationView {
-            ZStack {            //ZStack은 뷰를 겹칠 수 있다.
-            //배경 이미지 삽입
-            Image("profileImage")
-                .resizable()
-                .scaledToFit()
-                .ignoresSafeArea()
-            
-            // 텍스트 작성
-            VStack(alignment: .leading) {
-                Text("Meet the")
-                    .font(.system(size: 73, weight: .bold))
-                    .offset(x: 33, y: 75)
-                Text("Makers")
-                    .font(.system(size: 73, weight: .bold))
-                    .offset(x: 33, y: 70)
+            ZStack {                 // ZStack은 뷰를 겹칠 수 있다.
+                //배경 이미지
+                Image("ProfileImage")
+                    .resizable()
+                    .scaledToFit()
+                    .ignoresSafeArea()
                 
-                // 버튼은 HStack으로 감싸서 중앙 정렬 처리
-                HStack {
-                    Spacer()
-                    NavigationLink(destination: ProfileView()) {
-                        ZStack {
-                            Circle()
-                                .fill(.white)
-                                .frame(width: 68, height: 68)
-                                .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 2)
-                        
-                        // 화살표 아이콘 추가
-                        Image(systemName: "arrow.right")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 33, height: 33)
-                            .foregroundColor(.black)
+                // 텍스트 작성
+                VStack(alignment: .leading) {
+                    Text("Meet the")
+                        .font(.system(size: 73, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(.leading, 47)
+                        .padding(.top, 75)
+                    Text("Makers")
+                        .font(.system(size: 73, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(.leading, 47)
+                        .offset(y: -6)
+                    
+                    
+                    // 버튼은 HStack으로 감싸서 중앙 정렬 처리
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: ProfileView()) {
+                            ZStack {
+                                Circle()
+                                    .fill(.white)
+                                    .frame(width: 68, height: 68)
+                                    .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 2)
+                                
+                                Image(systemName: "arrow.right")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 33, height: 33)
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        Spacer()
                     }
-                        .offset(x: 0, y: 100)
+                    .padding(.bottom, 30)
+                    .offset(y: 34)
                 }
-                    Spacer()
+                .offset(y: 36)
             }
-                .padding(.bottom, 30)
-            }
-            .padding()
-            }
-        .navigationBarHidden(true)
+            .navigationBarHidden(true)
         }
-    }
-}
-struct ProfileView: View {
-    var body: some View {
-        Text("Profile View")
-            .font(.largeTitle)
-            .padding()
     }
 }
 
