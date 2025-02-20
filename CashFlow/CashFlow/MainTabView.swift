@@ -24,7 +24,7 @@ struct MainTabView: View {
                 }
             
             
-            ProfileView()
+            LandingScreen()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Profile")
