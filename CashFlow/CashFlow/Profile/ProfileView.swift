@@ -1,18 +1,2 @@
-//
-//  ProfileVew.swift
-//  CashFlow
-//
-//  Created by nelime on 2/15/25.
-//
-
-import SwiftUI
-
-struct ProfileView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    ProfileView()
-}
+// credits 첫 페이지
+// button을 활용해 다음 페이지로 넘어가는 기능
