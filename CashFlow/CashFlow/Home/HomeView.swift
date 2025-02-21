@@ -80,24 +80,28 @@ struct HomeView: View {
                         HStack {
                             VStack{
                                 Text("총 고정 지출")
+                                    .padding(.vertical, 3)
                                 Text("\(monthlySummary.fixedExpense) 원")
                                     .font(.title3)
                             }
-                            .padding(.horizontal, 30)
-                            .padding(.vertical, 20)
+                            .frame(width: 160, height: 90)
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(10)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 5)
+                            
                         }
                         HStack {
                             VStack{
                                 Text("포인트 총액")
+                                    .padding(.vertical, 3)
                                 Text("309,300 p")
                                     .font(.title3)
                             }
-                            .padding(.horizontal, 30)
-                            .padding(.vertical, 20)
+                            .frame(width: 160, height: 90)
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(10)
+                            .padding(.horizontal, 5)
                         }
                         
                     }
@@ -106,29 +110,31 @@ struct HomeView: View {
                         HStack {
                             VStack{
                                 Text("최근 소비 항목")
+                                    .padding(.vertical, 3)
                                 Text("89,300 원")
                                     .font(.title3)
                                 Text("소니 인터렉티브 코리아")
                                     .font(.caption)
                                 
                             }
-                            .padding(.horizontal, 25)
-                            .padding(.vertical, 10)
+                            .frame(width: 160, height: 90)
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(10)
+                            .padding(.horizontal, 5)
                            
                         }
                         HStack {
                             VStack{
                                 Text("대출 잔여액")
+                                    .padding(.vertical, 3)
                                 Text("2,339,300 원")
                                     .font(.title3)
                                 
                             }
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 20)
+                            .frame(width: 160, height: 90)
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(10)
+                            .padding(.horizontal, 5)
                             
                         }
                         
