@@ -12,6 +12,7 @@ struct Transaction: Identifiable, Codable, Equatable {
     var id: UUID
     
     var date: Date
+    var monthKey: String
     var name: String
     var amount: String
     var amountValue: Int
@@ -26,6 +27,6 @@ enum TransactionCategory: String, Codable, CaseIterable {
 }
 
 extension Transaction {
-    static var sampleData = Transaction(id: UUID(), date: Date(), name: "sample", amount: "123,333,222 원", amountValue: 123333222, category: .expense)
+    static var sampleData = Transaction(id: UUID(), date: Date(), monthKey: "2025-02", name: "sample", amount: "123,333,222 원", amountValue: 123333222, category: .expense)
         
 }

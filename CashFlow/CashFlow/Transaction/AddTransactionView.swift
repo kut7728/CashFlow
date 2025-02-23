@@ -94,6 +94,7 @@ struct AddTransactionView: View {
                 
                 Button {
                     viewModel.addTotransList()
+                    print("add button pressed")
                     dismiss()
                 } label: {
                     Text("저장")

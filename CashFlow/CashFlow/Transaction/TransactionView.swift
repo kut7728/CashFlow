@@ -12,7 +12,9 @@ struct TransactionView: View {
     @State private var refreshTrigger = UUID()
     @Environment(MainViewModel.self) var mainViewModel
     
-    private var monthlySummary: (income: Int, expense: Int, fixedExpense: Int) { MainViewModel.shared.monthlySummary["2025-02"] ?? (0, 0, 0) }
+    private var monthKey: String = Date().yearMonthString()
+    private var monthlySummary: (income: Int, expense: Int, fixedExpense: Int) { MainViewModel.shared.monthlySummary[monthKey] ?? (0, 0, 0) }
+    
     
     // MARK: - body
     var body: some View {
@@ -72,7 +74,7 @@ struct TransactionView: View {
                 .frame(height: 130)
                 
                 List {
-                    ForEach(mainViewModel.transList) { transaction in
+                    ForEach(MainViewModel.shared.transList[monthKey] ?? []) { transaction in
                         
                         TransactionCellView(transaction: transaction)
                             .id(refreshTrigger)
@@ -88,9 +90,15 @@ struct TransactionView: View {
             .refreshable {
                 refreshTrigger = UUID()
             }
-            .onChange(of: mainViewModel.transList) { _, _ in
+//            .onAppear {
+//                print(MainViewModel.shared.transList[monthKey])
+//                mainViewModel.saveTrans()
+//                mainViewModel.calculateMonthlyIncomeAndExpense(monthKey)
+//                refreshTrigger = UUID()
+//            }
+            .onChange(of: MainViewModel.shared.transList) { oldValue, newValue in
                 mainViewModel.saveTrans()
-                mainViewModel.calculateMonthlyIncomeAndExpense()
+                mainViewModel.calculateMonthlyIncomeAndExpense(monthKey)
                 refreshTrigger = UUID()
             }
         }

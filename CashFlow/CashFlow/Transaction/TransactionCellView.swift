@@ -49,7 +49,7 @@ struct TransactionCellView: View {
         .frame(height: 55)
         .swipeActions(allowsFullSwipe: true) {
             Button(role: .destructive) {
-                MainViewModel.shared.transList.removeAll { $0.id == transaction.id }
+                MainViewModel.shared.transList[transaction.monthKey]?.removeAll { $0.id == transaction.id }
             } label: {
                 Label("삭제", systemImage: "trash")
                 

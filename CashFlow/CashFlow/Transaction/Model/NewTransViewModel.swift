@@ -17,22 +17,32 @@ class NewTransViewModel {
     var amount: String = "" // 원이 붙은 포맷된 문자열
     var amountValue: Int = 0 // 순수한 정수 값
     var date: Date = Date()
+    var monthKey:String = ""
     var category: TransactionCategory = .expense
     
     
-    
-    
     // MARK: - 메서드
-    
     func addTotransList() {
-        MainViewModel.shared.transList.append(Transaction(id: id,
-                                                          date: date,
-                                                          name: transactionName,
-                                                          amount: amount,
-                                                          amountValue: amountValue,
-                                                          category: category)
+        self.monthKey = date.yearMonthString()
+        
+        // 해당 월의 저장소가 없다면 새로 추가
+        if MainViewModel.shared.transList[monthKey] == nil {
+            MainViewModel.shared.transList[monthKey] = []  // 초기값 설정
+        }
+        
+        MainViewModel.shared.transList[monthKey]?.append(
+            Transaction(id: id,
+                        date: date,
+                        monthKey: monthKey,
+                        name: transactionName,
+                        amount: amount,
+                        amountValue: amountValue,
+                        category: category)
         )
-        MainViewModel.shared.transList.sort( by: { $0.date > $1.date } )
+        
+        MainViewModel.shared.transList[monthKey]?.sort( by: { $0.date > $1.date } )
+        print("add to translist method")
+        print(MainViewModel.shared.transList[monthKey])
     }
     
     /// 원과 쉼표가 붙은 포맷 문자열 출력하는 메서드
