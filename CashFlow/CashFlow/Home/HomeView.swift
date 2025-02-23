@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    //버튼 누를때 바뀌는 텍스트 부붐
-    @State var btnText = "ᐯ"
+
     @State private var showDetail = false
+    @State private var rotationAngle: Double = 0
     
     private var monthlySummary: (income: Int, expense: Int, fixedExpense: Int) { MainViewModel.shared.monthlySummary[Date().yearMonthString()] ?? (0, 0, 0) }
-    
     
     var body: some View {
         VStack{
@@ -64,15 +63,17 @@ struct HomeView: View {
             
             //MARK:상세보기 부분
             VStack{
-                Button(btnText){
-                    self.showDetail.toggle()
-                    
-                    if showDetail {
-                        btnText = "ᐱ"
-                    }else {
-                        btnText = "ᐯ"
+                Button {
+                    withAnimation(.bouncy) {
+                        showDetail.toggle()
+                        rotationAngle += 180
                     }
-                }.buttonStyle(.plain)
+                } label: {
+                    Image(systemName: "chevron.down")
+                            .font(.title2)
+                            .rotationEffect(.degrees(rotationAngle))
+                            .animation(.easeInOut(duration: 0.5), value: rotationAngle)
+                }.padding(.bottom, 5)
                 
                 if showDetail {
                     //상세보기 버튼을 눌렀을때 나오는 화면
@@ -105,7 +106,7 @@ struct HomeView: View {
                         }
                         
                     }
-                   
+                    
                     HStack{
                         HStack {
                             VStack{
@@ -121,7 +122,7 @@ struct HomeView: View {
                             .background(Color.gray.opacity(0.2))
                             .cornerRadius(10)
                             .padding(.horizontal, 5)
-                           
+                            
                         }
                         HStack {
                             VStack{
@@ -140,11 +141,23 @@ struct HomeView: View {
                         
                     }
                 }
+                
+                VStack{
+                    Text("분석")
+                        .frame(width: 330, alignment: .leading)
+                        .font(.title)
+                    
+                }
+                .padding(.vertical, 8)
+                .padding(.top, 10)
+                
+                VStack{
+                    Text("그래프가 보이는 공간")
+                    //그래프가 위치할 곳
+                }.frame(width: 330, height: 235)
+                    .background(Color.gray.opacity(0.2))
             }
             Spacer()
-            
-           
-
             
             //상세 표시 보튼이랑 분석 화면 사이로 (그래프는 추후 예정)
             //총 고정 지출
@@ -152,7 +165,6 @@ struct HomeView: View {
             //최근 소비 항목
             //대출 잔여액
             //평상시 숨겼다가 상세표시 버튼을 누를때 표시
-            
             
         }
     }
