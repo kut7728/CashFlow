@@ -99,4 +99,6 @@ struct TransactionView: View {
 
 #Preview {
     TransactionView()
+        .environment(MainViewModel())
+
 }
