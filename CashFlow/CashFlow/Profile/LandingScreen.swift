@@ -1,11 +1,11 @@
-// DevelopersTab 진입시 첫 화면
+// Tab 진입시 첫 화면
 // Button을 활용해 ProfileView 페이지 진입
 
 import SwiftUI
 
 struct LandingScreen: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {                 // ZStack은 뷰를 겹칠 수 있다.
                 //배경 이미지
                 Image("ProfileImage")
@@ -30,7 +30,7 @@ struct LandingScreen: View {
                     // 버튼은 HStack으로 감싸서 중앙 정렬 처리
                     HStack {
                         Spacer()
-                        NavigationLink(destination: ProfileView()) {
+                        NavigationLink(destination: ProfileMainView()) {    // NavigationLink 를 통해 다음페이지로 이동
                             ZStack {
                                 Circle()
                                     .fill(.white)

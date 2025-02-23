@@ -22,6 +22,7 @@ struct MainTabView: View {
                     Image(systemName: "wallet.bifold")
                     Text("Account")
                 }
+
             
             
             LandingScreen()
@@ -35,4 +36,5 @@ struct MainTabView: View {
 
 #Preview {
     MainTabView()
+        .environment(MainViewModel.shared)
 }
