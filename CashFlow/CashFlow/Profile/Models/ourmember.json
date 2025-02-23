@@ -1,0 +1,44 @@
+[
+    {
+        "id": "1",
+        "name": "김규철",
+        "ename": "KIM GYUCHEOL",
+        "position": "Developer of the Member Page",
+        "birthYear": "1996",
+        "mbti": "INFP",
+        "hobbies": "음악을 들으면서 제작자의 의도에 관해 생각해봅니다.",
+        "workStyle": "가능한 의견을 수렴해주고, 자유로운 분위기를 선호합니다.",
+        "greeting": "＂🍏의 단순한 소비자에서, 기술 발전에 기여하는 🍎에 합류하고 싶습니다!＂",
+        "githubURL": "https://github.com/chillax96/Iamaswifty.git",
+        "blogURL": "https://velog.io/@chillax96/posts",
+        "notionURL": "https://www.notion.so/17eebaa8982b80d28ac9ed0dce457d83?pvs=4"
+    },
+    {
+        "id": "2",
+        "name": "김의택",
+        "ename": "KIM UITAEK",
+        "position": "Developer of the",
+        "birthYear": "1998",
+        "mbti": "INTJ",
+        "hobbies": "카메라로 사진찍기, 기타연주, 유유자적",
+        "workStyle": "내 몫은 확실하게 하고 동료가 도움을 바라면 최선을 다해 돕습니다!",
+        "greeting": "네이티브에 진심인 앱 개발자, 김의택입니다!",
+        "githubURL": "https://github.com/kut7728",
+        "blogURL": "https://velog.io/@kut7728/posts",
+        "notionURL": "https://www.notion.so/17eebaa8982b80b78bfff79327319fff?pvs=4"
+    },
+    {
+        "id": "3",
+        "name": "한인탁",
+        "ename": "HAN INTAK",
+        "position": "Developer of the",
+        "birthYear": "1991",
+        "mbti": "INFJ",
+        "hobbies": "기술에 관한 유튜브를 보는 것을 좋아합니다.",
+        "workStyle": "아직은 도움을 주기보다는 받는 타입입니다. ",
+        "greeting": "안녕하세요! 한인탁 입니다.",
+        "githubURL": "https://github.com/IntakHan304",
+        "blogURL": "미운영",
+        "notionURL": "https://www.notion.so/182ebaa8982b80b2b097fa41f01823bd?pvs=4"
+    }
+]

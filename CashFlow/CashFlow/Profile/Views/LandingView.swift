@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-struct LandingScreen: View {
+struct LandingView: View {
     var body: some View {
         NavigationStack {
             ZStack {                 // ZStack은 뷰를 겹칠 수 있다.
@@ -59,6 +59,6 @@ struct LandingScreen: View {
 // 미리보기 코드
 struct DevelopersView_Previews: PreviewProvider {
     static var previews: some View {
-        LandingScreen()
+        LandingView()
     }
 }

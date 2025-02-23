@@ -10,9 +10,14 @@ struct AddMemberSheetView: View {
     @State private var name: String = ""
     @State private var ename: String = ""
     @State private var position: String = ""
-    @State private var intro: String = ""
     @State private var github: String = ""
     @State private var blog: String = ""
+    @State private var notion: String = ""
+    @State private var birthYear: String = ""
+    @State private var mbti: String = ""
+    @State private var hobbies: String = ""
+    @State private var workStyle: String = ""
+    @State private var greeting: String = ""
     
     let onSave: (TeamMember) -> Void
     
@@ -23,12 +28,12 @@ struct AddMemberSheetView: View {
                     TextField("성명", text: $name)
                     TextField("영문성명", text: $ename)
                     TextField("역할", text: $position)
-                    TextField("간단소개", text: $intro)
                     TextField("GitHub URL", text: $github)
                     TextField("Blog URL", text: $blog)
+                    TextField("Notion URL", text: $notion)
                 }
             }
-            .navigationTitle("Add Member")
+            .navigationTitle("합류하기")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("저장") {
@@ -36,9 +41,14 @@ struct AddMemberSheetView: View {
                             name: name,
                             ename: ename,
                             position: position,
-                            intro: intro,
                             githubURL: github,
-                            blogURL: blog
+                            blogURL: blog,
+                            notionURL: notion,
+                            birthYear: birthYear,
+                            mbti: mbti,
+                            hobbies: hobbies,
+                            workStyle: workStyle,
+                            greeting: greeting
                         )
                         onSave(newmember)
                         dismiss()
