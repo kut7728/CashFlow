@@ -26,3 +26,13 @@ extension Date {
         return formatter.string(from: self)
     }
 }
+
+extension Date {
+    
+    func yearMonthTitleString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy년 M월"  // "2025-02"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: self)
+    }
+}

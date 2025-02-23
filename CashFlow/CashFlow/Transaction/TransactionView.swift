@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct TransactionView: View {
+    @Environment(MainViewModel.self) var mainViewModel
     @State private var showAddTrans: Bool = false
     @State private var refreshTrigger = UUID()
-    @Environment(MainViewModel.self) var mainViewModel
+    @State private var targetMonth: Int = 0
     
-    private var monthKey: String = Date().yearMonthString()
+    private var monthTitle: String {
+        mainViewModel.yearMonthTitle(value: targetMonth).yearMonthTitleString()
+    }
+    private var monthKey: String {
+        mainViewModel.yearMonthTitle(value: targetMonth).yearMonthString()
+    }
     private var monthlySummary: (income: Int, expense: Int, fixedExpense: Int) { MainViewModel.shared.monthlySummary[monthKey] ?? (0, 0, 0) }
+    
     
     
     // MARK: - body
@@ -25,11 +32,28 @@ struct TransactionView: View {
                 // MARK: - 상단 탭
                 VStack {
                     HStack {
-                        Text("2025년 2월")
+                        Button {
+                            targetMonth -= 1
+                        } label: {
+                            Image(systemName: "chevron.left")
+                        }
+
+                        Text(monthTitle)
                             .font(.title)
                             .fontWeight(.bold)
+                            .padding(.horizontal)
+                        
+                        Button {
+                            targetMonth += 1
+                        } label: {
+                            Image(systemName: "chevron.right")
+                        }
                         
                         Spacer()
+                    }
+                    .tint(.black)
+                    .onChange(of: targetMonth) { _, _ in
+                        mainViewModel.calculateMonthlyIncomeAndExpense(monthKey)
                     }
                     
                     Spacer()
@@ -90,16 +114,11 @@ struct TransactionView: View {
             .refreshable {
                 refreshTrigger = UUID()
             }
-//            .onAppear {
-//                print(MainViewModel.shared.transList[monthKey])
-//                mainViewModel.saveTrans()
-//                mainViewModel.calculateMonthlyIncomeAndExpense(monthKey)
-//                refreshTrigger = UUID()
-//            }
             .onChange(of: MainViewModel.shared.transList) { oldValue, newValue in
                 mainViewModel.saveTrans()
                 mainViewModel.calculateMonthlyIncomeAndExpense(monthKey)
                 refreshTrigger = UUID()
+                print("on change of")
             }
         }
     }
@@ -107,6 +126,6 @@ struct TransactionView: View {
 
 #Preview {
     TransactionView()
-        .environment(MainViewModel())
+        .environment(MainViewModel.shared)
 
 }

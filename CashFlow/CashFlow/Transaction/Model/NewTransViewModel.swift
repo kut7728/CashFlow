@@ -41,8 +41,6 @@ class NewTransViewModel {
         )
         
         MainViewModel.shared.transList[monthKey]?.sort( by: { $0.date > $1.date } )
-        print("add to translist method")
-        print(MainViewModel.shared.transList[monthKey])
     }
     
     /// 원과 쉼표가 붙은 포맷 문자열 출력하는 메서드

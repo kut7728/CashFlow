@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var mainViewModel = MainViewModel()
+    @State var mainViewModel = MainViewModel.shared
     @State var showSplash: Bool = true
 
     var body: some View {

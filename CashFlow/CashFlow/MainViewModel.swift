@@ -16,9 +16,19 @@ class MainViewModel {
     var transList: [String:[Transaction]] = [:]
     var monthlySummary: [String: (income: Int, expense: Int, fixedExpense: Int)] = [:]  // { "2025-02": (income: 500000, expense: 320000), ... }
     
-    init() {
+    let today: Date = Date()
+    var calendar = Calendar.current
+    
+    private init() {
         loadTrans()
         calculateMonthlyIncomeAndExpense(Date().yearMonthString())
+    }
+    
+    func yearMonthTitle(value: Int) -> Date {
+        guard let resultDate = calendar.date(byAdding: .month, value: value, to: today) else {
+            return Date()
+        }
+        return resultDate
     }
     
     
@@ -94,7 +104,7 @@ class MainViewModel {
             if let transactions = try? decoder.decode([String:[Transaction]].self, from: data) {  // JSON 데이터를 User 배열로 변환
                 print("데이터 불러오기 성공")
                 self.transList = transactions  // 변환된 User 배열 반환
-                print("불러들인 데이터 :", transList)
+//                print("불러들인 데이터 :", transList)
                 return
             }
         }
