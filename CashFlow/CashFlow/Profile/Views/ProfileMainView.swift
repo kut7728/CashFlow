@@ -25,7 +25,7 @@ struct PersonalCardView: View {
         NavigationLink(destination: DetailView(member: member, viewModel: viewModel)) {
             ZStack(alignment: .topLeading) { // 명함을 ZStack으로 구성
                 // 배경 이미지 (명함 템플릿)
-                Image("personalCard")
+                Image("PersonalCard")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 340, height: 600)
