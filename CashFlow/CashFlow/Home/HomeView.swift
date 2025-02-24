@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct HomeView: View {
 
@@ -14,7 +15,11 @@ struct HomeView: View {
     
     private var monthlySummary: (income: Int, expense: Int, fixedExpense: Int) { MainViewModel.shared.monthlySummary[Date().yearMonthString()] ?? (0, 0, 0) }
     
+    
     var body: some View {
+    //자산 부분 수입 - 지출 
+    let totalSummary = (monthlySummary.income)+(monthlySummary.expense)
+
         VStack{
         //MARK:상단 탭
             VStack{
@@ -152,8 +157,13 @@ struct HomeView: View {
                 .padding(.top, 10)
                 
                 VStack{
-                    Text("그래프가 보이는 공간")
-                    //그래프가 위치할 곳
+                    Chart{
+                        //자산 그래프 기준
+                        BarMark(x: .value("type", "11월"), y: .value("count", 100000))
+                        BarMark(x: .value("type", "12월"), y: .value("count", 188760))
+                        BarMark(x: .value("type", "1월"), y: .value("count", 200000))
+                        BarMark(x: .value("type", "2월"), y: .value("count", totalSummary))
+                    }
                 }.frame(width: 330, height: 235)
                     .background(Color.gray.opacity(0.2))
             }
